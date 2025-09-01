@@ -1,0 +1,63 @@
+package com.boot.springBoot_basic.dto;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+// JSP가 추가되어야 @Entity, @Table import가 가능하다
+// javax.persistence <-- 사용\
+
+// 롬복 추가된 DTO
+
+
+@Data					// getter setter 생략 가능 (lombok)
+@AllArgsConstructor		// 매개변수 생성자 대체
+@NoArgsConstructor		// 디폴트 생성자 대신
+@Entity					// ROM(table의 컬럼과 Object 의 멤버변수를 매핑)
+@Table(name="mvc_product_tbl")
+public class ProductDTO {
+	
+	private int id;
+	private String name;
+	private String brand;
+	private String madein;
+	private int price;
+	
+	@Id				// PK로 설정하겠다
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getMadein() {
+		return madein;
+	}
+	public void setMadein(String madein) {
+		this.madein = madein;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	
+}

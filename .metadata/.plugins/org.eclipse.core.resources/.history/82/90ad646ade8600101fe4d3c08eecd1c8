@@ -1,0 +1,52 @@
+package com.boot.springBoot_basic.dto;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+// JSP가 추가되어야 @Entity, @Table import가 가능하다
+// javax.persistence <-- 사용
+
+@Entity				// ROM(table의 컬럼과 Object 의 멤버변수를 매핑)
+@Table(name="mvc_product_tbl")
+public class ProductDTO_no_lombok {
+	
+	private int id;
+	private String name;
+	private String brand;
+	private String madein;
+	private int price;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getMadein() {
+		return madein;
+	}
+	public void setMadein(String madein) {
+		this.madein = madein;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	
+}

@@ -1,0 +1,20 @@
+package com.boot.springBoot_basic.service;
+
+public interface ProductService {
+	
+	// list
+	
+	
+	// insert
+	
+	
+	// update
+	
+	
+	// delete
+	
+	
+	// 1건 select
+	
+	
+}

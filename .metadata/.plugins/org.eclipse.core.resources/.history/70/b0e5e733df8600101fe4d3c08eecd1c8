@@ -1,0 +1,25 @@
+package com.boot.springBoot_basic.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.ui.Model;
+
+public interface ProductService {
+	
+	// list
+	public void listAll(HttpServletRequest request, HttpServletResponse response, Model model);
+	
+	// insert
+	
+	
+	// update
+	
+	
+	// delete
+	
+	
+	// 1건 select
+	
+	
+}

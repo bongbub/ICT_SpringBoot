@@ -1,0 +1,17 @@
+spring.application.name=springBoot_basic
+
+# db connection(oracle) - spring(context.xml)
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=springboot_ict05
+spring.datasource.password=tiger
+
+
+
+# spring(servlet-context.xml) : jsp구성과 3번째 패키지(a.b.c)가 플젝명이 되는 정의 선언
+
+
+
+# MyBatis - spring(dataSource-config.xml)
+
+

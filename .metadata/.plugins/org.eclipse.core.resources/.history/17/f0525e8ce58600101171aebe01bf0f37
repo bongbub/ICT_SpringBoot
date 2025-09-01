@@ -1,0 +1,5 @@
+package com.boot.springBoot_basic.dao;
+
+public interface ProductDAO {
+
+}

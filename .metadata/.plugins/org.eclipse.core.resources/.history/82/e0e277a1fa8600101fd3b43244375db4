@@ -1,0 +1,30 @@
+package com.boot.springBoot_basic.dao;
+
+import java.util.List;
+
+import com.boot.springBoot_basic.dto.ProductDTO;
+
+public interface ProductDAO {
+	
+	// list
+	public List<ProductDTO> productList();
+	
+	
+	// insert
+	public int insertProduct(ProductDTO_no_lombok dto);
+	
+	
+	// update
+	public int updateProduct(ProductDTO_no_lombok dto);
+	
+	
+	// delete
+	public int updateProduct(int id);
+	
+	
+	// 1건 select
+	public ProductDTO_no_lombok findById(int id);
+	
+	
+
+}

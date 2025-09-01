@@ -1,0 +1,24 @@
+spring.application.name=springBoot_basic
+
+# db connection(oracle) - spring(context.xml)
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=springboot_ict05
+spring.datasource.password=tiger
+
+# http port number (default 8080)
+server.port=8081
+
+
+# JPA SQL SHOW
+spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect
+spring.jpa.show-sql=true
+
+# spring(servlet-context.xml) : jsp구성과 3번째 패키지(a.b.c)가 플젝명이 되는 정의 선언
+spring.mvc.view.prefix=/WEB-INF/views
+spring.mvc.view.suffix=.jsp
+server.jsp-servlet.init-parameters.development=true
+
+# MyBatis - spring(dataSource-config.xml)
+
+

@@ -1,0 +1,11 @@
+package com.boot.springBoot_basic.dao;
+
+public interface ProductDAO {
+	
+	// list
+	public List<ProductDTO_no_lombok> productList();
+	// insert
+	
+	// update
+
+}

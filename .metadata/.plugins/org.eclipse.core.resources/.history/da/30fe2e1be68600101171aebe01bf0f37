@@ -1,0 +1,39 @@
+package com.boot.springBoot_basic.dao;
+
+import java.util.List;
+
+import com.boot.springBoot_basic.dto.ProductDTO_no_lombok;
+
+public class ProductDAOImpl implements ProductDAO {
+
+	// list
+	@Override
+	public List<ProductDTO_no_lombok> productList() {
+		return null;
+	}
+
+	// insert
+	@Override
+	public int insertProduct(ProductDTO_no_lombok dto) {
+		return 0;
+	}
+
+	// update
+	@Override
+	public int updateProduct(ProductDTO_no_lombok dto) {
+		return 0;
+	}
+
+	// delete
+	@Override
+	public int updateProduct(int id) {
+		return 0;
+	}
+
+	// 1건 select
+	@Override
+	public ProductDTO_no_lombok findById(int id) {
+		return null;
+	}
+
+}

@@ -1,0 +1,33 @@
+package com.boot.springBoot_basic.service;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.ui.Model;
+
+public interface ProductService {
+	
+	// list
+	public void listAll(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
+	
+	// insert
+	public void listAll(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
+	
+	// update
+	public void listAll(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
+	
+	// delete
+	public void listAll(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
+	
+	// 1건 select
+	public void listAll(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws ServletException, IOException;
+	
+}
