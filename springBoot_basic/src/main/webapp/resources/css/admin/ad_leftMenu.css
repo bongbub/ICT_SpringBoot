@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.order_menu, .product_menu {
+	text-align:center;
+ 	font-family: 'SUIT-Regular'; 
+	padding:2px;
+	padding-left:0;
+	color:#565656;
+}
+
+.order_menu li, .product_menu li {
+    text-align: center;
+    margin-bottom:5px;
+}
+
+.product_menu li a, .order_menu li a {
+    display: block;
+    text-align: center;
+}
+
+/* 좌측메뉴 시작 */
+#left {
+	width: 12%;
+	min-width: 12%;
+	margin-top: 15px;
+	height: 100%;
+	border-radius: 10px;
+	margin-right: 50px;
+}
+
+.left_inside {
+	background: whitesmoke;
+	margin: 0 0 0 0;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+	text-align: center;  
+}
+
+.left_menubar {
+	margin-left: -40px;
+}
+
+.left_menubar  li {
+	list-style: none;
+	text-align: center;
+}
+
+.left_menubar  li  a {
+	color: black;
+	text-decoration: none;
+}
+/* 좌측메뉴 종료 */
+h3, h4{
+	font-family:goorm-sans-bold;
+}

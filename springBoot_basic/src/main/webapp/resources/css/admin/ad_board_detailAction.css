@@ -1,0 +1,101 @@
+@charset "UTF-8";
+/* ad_productList.css */
+
+/* 컨텐츠 시작 */
+#container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#contents {
+	max-width: 1100px;
+	min-width: 1100px;
+	width: 100%;
+	margin: 0 auto;
+	min-height: 800px;
+}
+
+#section2 {
+	display: flex;		/* 한줄(수평)로 배치 */
+	justify-content: space-between;
+}
+/* 컨텐츠 종료 */
+
+-----------------------------
+
+/* 우측내용 시작 */
+#right {
+	width: 88%;
+}
+
+.table_div {
+	margin-top: 30px;
+	border-radius:10px;
+	min-width:80%;
+}
+
+.table_div  table {
+	border-collapse: collapse;
+	border:1px solid grey;
+	width: 800px; 
+	text-align: center;
+}
+
+.table_div  table th {
+	background: #e7e7e7;
+	width:20%;
+}
+
+.table_div  table th, td {
+	border-top :1px solid grey;
+	height: 50px;
+	padding-left: 2px;
+	text-align: center;
+	min-width:100px;
+}
+
+.input {
+	min-width: 80%;
+	height: 40px;
+	border: 1px solid gray;
+	padding: 0 0 0 10px;
+}
+
+.inputButton {
+	background: dark-yellow;
+	font-size: 16px;
+	padding: 5px 10px 5px 10px;
+}
+
+#not_pwd{
+	color:red;
+}
+
+.content_box{
+	min-height : 50%px;
+	padding:20px;
+}
+.comment {
+	width: 100%;
+	max-width: 600px;
+	margin:40px auto;
+}
+
+.input_com,
+#c_writer,
+#c_content {
+	width: 100%;
+	max-width:800px;
+	height: 40px;
+	padding:0 10px;
+	box-sizing:border-box;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+}
+
+#c_content {
+	height:120px;
+	resize:vertical;
+}
+
+/* 우측내용 종료*/

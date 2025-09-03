@@ -29,28 +29,35 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int insertProduct(ProductDTO dto) {
 		System.out.println(" DAOImpl - insertProduct() ");
-		return 0;
+		
+		int insertCnt = sqlSession.insert("com.boot.springBoot_basic.dao.ProductDAO.insertProduct", dto);
+		return insertCnt;
 	}
 
 	// update
 	@Override
 	public int updateProduct(ProductDTO dto) {
 		System.out.println(" DAOImpl - updateProduct() ");
-		return 0;
+		
+		int updateCnt = sqlSession.update("com.boot.springBoot_basic.dao.ProductDAO.updateProduct", dto);
+		return updateCnt;
 	}
 
 	// delete
 	@Override
-	public int updateProduct(int id) {
+	public int deleteProduct(int id) {
 		System.out.println(" DAOImpl - updateProduct() ");
-		return 0;
+		int deleteCnt = sqlSession.delete("com.boot.springBoot_basic.dao.ProductDAO.deleteProduct", id);
+		return deleteCnt;
 	}
 
 	// 1건 select
 	@Override
 	public ProductDTO findById(int id) {
 		System.out.println(" DAOImpl - findById() ");
-		return null;
+		
+		ProductDTO dto = sqlSession.selectOne("com.boot.springBoot_basic.dao.ProductDAO.findById", id);
+		return dto;
 	}
 
 }

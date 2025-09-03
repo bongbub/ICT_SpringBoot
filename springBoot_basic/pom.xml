@@ -101,19 +101,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<!-- lombok(롬복) 0) default : 디펜던시에서 추가 시, 디폴트로 추가됨(사용안함) -->
-<!--		<build>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>3.5.5</version>
-				</plugin>
-			</plugins>
-		</build>-->
-		<!-- 롬복(3) version 추가-->
 		
+	<!-- 롬복(2) version추가 -->
    <build>
       <plugins>
          <plugin>
@@ -127,7 +116,7 @@
                   <path>
                      <groupId>org.projectlombok</groupId>
                      <artifactId>lombok</artifactId>
-                     <version>1.18.36</version> 
+                     <version>1.18.38</version> 	<!-- 변경 -->
                   </path>
                </annotationProcessorPaths>
             </configuration>

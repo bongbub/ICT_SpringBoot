@@ -19,7 +19,7 @@ public interface ProductDAO {
 	
 	
 	// delete
-	public int updateProduct(int id);
+	public int deleteProduct(int id);
 	
 	
 	// 1건 select

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 커넥션풀 -->
+		<!-- Mybatis 설정 시작 -->
+		<!-- 반드시 pom.xml에 jar 파일 먼저 추가해야 함!!!!! -->
+		<!-- 컨넥션풀 -->
+		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+			<property name="jndiName" value="java:comp/env/jdbc/jsp_pj_ict05" />
+			<property name="resourceRef" value="true" />
+		</bean>
+		
+		<!-- Mybatis 파일 위치 지정, 컨넥션풀 -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="mapperLocations" value="classpath:mappers/**/*.xml" />  
+		</bean>
+		
+		<!-- 생성자 DI이며, sqlSession이 참조변수 --> <!-- 아래 코드 자체가 객체생성(xml에서 객체생성) -->
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg ref="sqlSessionFactory" />
+		</bean>
+	
+	<!-- MyBatis 파일 위치 지정, 커넥션풀 지정 -->
+	
+	
+
+</beans>

@@ -1,0 +1,106 @@
+@charset "UTF-8";
+/* ad_productList.css */
+
+/* 컨텐츠 시작 */
+#container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#contents {
+	max-width: 1100px;
+	min-width: 1100px;
+	width: 100%;
+	margin: 0 auto;
+	min-height: 800px;
+}
+
+#section2 {
+	display: flex;		/* 한줄(수평)로 배치 */
+	justify-content: space-between;
+}
+/* 컨텐츠 종료 */
+
+-----------------------------
+
+/* 우측내용 시작 */
+#right {
+	width: 88%;
+}
+
+.table_div {
+	margin-top: 30px;
+	overflow-x:auto;
+	max-width:100%
+}
+
+.table_div  table {
+	border-collapse: collapse;
+	width: 100%; 
+	min-width:800px;
+	align-content: center;
+	border-bottom:1px solid #545454;
+}
+
+.table_div  table th {
+	background: rgb(242, 242, 242);
+}
+
+.table_div  table th, td {
+	height: 50px;
+	border: 1px solid black;
+	padding-left: 2px;
+	text-align: center;
+}
+
+.input {
+	width: 550px;
+	height: 40px;
+	border: 1px solid gray;
+	padding: 0 0 0 10px;
+}
+
+.inputButton {
+	background: dark-yellow;
+	font-size: 16px;
+	padding: 5px 10px 5px 10px;
+}
+
+/* 우측내용 종료*/
+
+/* 페이징 시작*/
+.table_div .pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.table_div .pagination li {
+    margin: 0 5px;
+}
+
+.table_div .pagination a {
+    display: block;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.table_div .pagination a:hover {
+    background-color: #f1c40f;
+    color: #fff;
+    border-color: #f39c12;
+}
+
+.table_div .pagination .active {
+    background-color: #f39c12;
+    color: #fff;
+    border-color: #f39c12;
+}
+
+/* 페이징 종료*/

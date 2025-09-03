@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor		// 매개변수 생성자 대체
 @NoArgsConstructor		// 디폴트 생성자 대신
 @ToString				// ToString() 대신 사용
-@Builder				// 
+@Builder				// 매개변수 생성자에, 순서를 맞춰서 넣어주지 않아도 마지막에 build()를 작동. 즉 같은 타입의 다른 변수의 값을 서로 바꿔넣는 것을 방지한다.
 @Entity					// ROM(table의 컬럼과 Object 의 멤버변수를 매핑)
 @Table(name="mvc_product_tbl")
 public class ProductDTO {

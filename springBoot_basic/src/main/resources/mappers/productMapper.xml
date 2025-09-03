@@ -11,4 +11,28 @@
 		ORDER BY id ASC
 	</select>
 	
+	
+	<insert id="insertProduct" parameterType="com.boot.springBoot_basic.dto.ProductDTO" >
+		INSERT INTO mvc_product_tbl (id, name, brand, madein, price)
+		  VALUES ((SELECT nvl(max(id)+1, 1) FROM mvc_product_tbl), #{name}, #{brand}, #{madein}, #{price})
+	</insert>
+	
+	<!-- 1건 조회(상세) -->
+	<select id="findById" parameterType="int" resultType="com.boot.springBoot_basic.dto.ProductDTO">
+		SELECT * FROM mvc_product_tbl 
+			WHERE id = #{id}
+	</select>
+	
+	<!-- update -->
+	<update id="updateProduct" parameterType="com.boot.springBoot_basic.dto.ProductDTO">
+		UPDATE mvc_product_tbl 
+			SET name = #{name}, brand= #{brand}, madein=#{madein}, price=#{price}
+		  WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteProduct" parameterType="int">
+		DELETE mvc_product_tbl
+			WHERE id = #{id}
+	</delete>
+	
 </mapper>

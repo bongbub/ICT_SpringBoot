@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+html, body {
+	height:100%;
+	overflow-x:hidden;
+	margin:0;
+}
+
+.wrap {
+	width:100%;
+	height:auto;
+	margin:0;
+	min-height:100%;
+}
+
+a {
+	color : white;
+	text-decoration : none;
+}
+
+div #right a {
+	color : black;
+	text-decoration:none;
+}
+
+
+/* navbar 시작 ------------------------------------------------------------*/
+.navbar {
+	display: flex;						/* 수평 배치 */
+	width:100%;
+	justify-content : space-evenly;	/* 시작과 끝은 벽에 붙이고 사이사이 공백 동일 */
+	align-items : center;				/* 수평인데 가운데 정렬 */
+	background-color : black;
+	opacity:0.88;
+	padding:8px 12px;
+	border-style:none;
+	
+}
+
+.navbar_title {
+	list-style : none;			/* 리스트 볼릿 없음 */
+	color: #d49466;
+	display : flex;
+	padding-left:10px;
+}
+
+.navbar_title li {
+	font-size : 30px;
+}
+
+.navbar_menu {
+	display: flex;
+	list-style:none;
+	padding-left:0px;
+	font-weight:bold;
+	font-size:20px;
+}
+
+.navbar_menu li {
+	padding : 8px 30px;
+	background: linear-gradient(180deg, black, transparent);
+	transform: translateY(calc(var(--r) * -2px)) rotate(calc(var(--c) * 1deg));
+  	transition: 0.5s;
+}
+
+
+.navbar_menu li:hover {  /*마우스 올렸을 때*/
+	border-radius : 4px;
+	transform: rotate(0) scale(1.5);
+	color:black;
+	z-index:1;
+	
+} 
+
+.navbar_icons {
+	margin:0;
+	display:flex;		/* 수평 한줄 배치 */
+	list-style:none;	/* 리스트 불릿 없앰 */
+	padding-left:0px;
+	color:white;
+}
+
+.navbar_icons li {
+	padding : 8px 15px;
+}
+
+
+.navbar_icons li:hover {	/* 마우스 올렸을 때 */
+	background-color : #fae09d;
+	border-radius : 4px;
+}
+
+/* navbar 종료-----------------------------------*/
+
+
+/* 반응형 웹 - (2). 햄버거 아이콘을 맨 오른쪽에 배치하기 */
+.navbar_toggleBtn {
+	/* 화면이 작아졌을 때 햄버거 아이콘이 보이게끔 */
+	display : none;		/* 처음엔 안 보이게 하기(화면이 768px 보다 작은 경우에만 보이기 */
+	position: absolute;
+	right:32px;		/* 오른쪽 32px 떨어진 곳에 배치 */
+	font-size:24px;
+	color: #d49466;
+}
+
+
+/* 반응형 웹 - (3). 미디어쿼리 */
+@media screen and (max-width:768px) {
+	/* (3-2). 시작해 창을 줄이면 햄버거 아이콘만 보이게 해고, 나머지는 버튼 클릭시 자바스크립트에서 핸들링 */
+	.navbar {
+		flex-direction:column;		/* 위에서 아래로 아이템 배치 */
+		align-items:flex-start;		/* 왼쪽으로 붙여서 display */
+		padding:8px 24px;
+	}
+	.navbar_menu {
+		display:none;
+		flex-direction:column;
+		align-items:center;
+		width:100%;
+	}
+	
+	/* 마우스 올리면 하이라이트를 전체 크기로 주기 */
+	.navbar_menu li {
+		width:100%;
+		text-align:center;
+	}
+	
+	/*  트위터, 페이스북, 기타 아이콘 가운데 정렬 */
+	.navbar_icons {
+		display:none;
+		justify-content:center;
+		width:100%; 
+	}
+
+	 /* (3-2) 종료 */
+	
+
+	/*	(3-1). 창을 줄이면 => 1차 테스트 : F12창에서 화면을 768보다 줄이면 햄버거 아이콘이 보이도록함*/
+	 
+	 .navbar_toggleBtn {
+	 	display : block;		/* 디스플레이를 세로로 보여주겠다 */
+	 	padding-right:5px;
+	 	padding-top:20px;
+	 }
+	 
+	 
+	/* (3-3). 자바스크립트에 이벤트 추가 : 햄버거 아이콘 클릭 -> 아래쪽으로 메뉴 나오도록 main.js에 작성 */
+	/* (3-4). 각 페이지마다 main.js 추가 */
+	
+	/* (3-5). activity 추가 - 햄버거버튼 클릭시 메뉴가 보여지고페이지 이동이 가능하도록,
+				또한 한 번 올라왔다면 메뉴가 감춰진다. */
+	.navbar_menu.active, .navbar_icons.active {
+		display:flex;		/* .active : toggle같은 느낌, 감췄다 보였다 */
+	}
+}
+
+
+
+
+

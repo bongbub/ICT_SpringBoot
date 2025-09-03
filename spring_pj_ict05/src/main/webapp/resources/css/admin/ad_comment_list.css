@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+
+.table_div  table {
+	border-collapse: collapse;
+	border:1px solid grey;
+	width: 800px; 
+	text-align: center;
+}
+
+.table_div  table th {
+	background: #e7e7e7;
+	width:20%;
+}
+
+.table_div  table th, td {
+	border-top :1px solid grey;
+	height: 50px;
+	padding-left: 2px;
+	text-align: center;
+	min-width:100px;
+}
+
+.comment {
+	width:800px;
+	margin:40 auto;
+}
+.comment table {
+	width:100%;
+}
+
+#comment_list.comment {
+	width: 800px;
+	margin: 0 auto;
+}
+
+table.comment {
+	width : 800px;
+	margin: 0 auto;
+}
