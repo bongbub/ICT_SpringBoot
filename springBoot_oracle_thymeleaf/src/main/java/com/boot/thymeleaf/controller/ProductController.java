@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.boot.thymeleaf.dto.ProductDTO;
@@ -58,7 +59,7 @@ public class ProductController {
 	
 	
 	// 상품 등록 처리
-	@RequestMapping("/save")
+	@RequestMapping("/save")		
 	// dto라는 변수명으로 ProductDTO를 가져와서 Model.addAttribute	--> 이전화면에서 넘어온 값이 setter로 들어가있음
 	public String save(@ModelAttribute("dto") ProductDTO dto)
 			throws ServletException, IOException{
@@ -68,29 +69,28 @@ public class ProductController {
 		return "redirect:/";			// 1건이 마지막 번호에 추가된 후, product_list.jsp로 이동
 	}
 	
-//	// 상세화면
-//	@RequestMapping("/edit")
-//	public String detail(HttpServletRequest request, HttpServletResponse response, Model model)
-//			throws ServletException, IOException{
-//		logger.info(" <<< url -> edit >>> ");
-//		return "product/product_updateForm";	
-//	}
-//	
-//	// 수정 처리
-//	@RequestMapping("/update")
-//	public String update(HttpServletRequest request, HttpServletResponse response, Model model)
-//			throws ServletException, IOException{
-//		logger.info(" <<< url -> update >>> ");
-//		return "redirect:/list";
-//	}
-//	
-//	// 삭제처리
-//	@RequestMapping("/delete")
-//	public String delete(HttpServletRequest request, HttpServletResponse response, Model model)
-//			throws ServletException, IOException{
-//		logger.info(" <<< url -> delete >>> ");
-//		return "redirect:/list";
-//	}
-//	
+	// 상세화면
+	@RequestMapping("/edit/{id}")		// "@{"/edit/" + ${dto.id}"
+	public String updateProductForm(@PathVariable(name="id") int id, Model model)
+			throws ServletException, IOException{
+		logger.info(" <<< url -> edit >>> ");
+		
+		ProductDTO dto = service.selectProduct(id);
+		model.addAttribute("dto", dto);
+		
+		return "product_updateForm";	
+	}
+	
+	// 삭제처리				// "@{'/delete/' + ${dto.id}}">Delete
+	@RequestMapping("/delete/{id}")		
+	public String deleteProductForm(@PathVariable(name="id") int id, Model model)
+			throws ServletException, IOException{
+		logger.info(" <<< url -> delete >>> ");
+		
+		service.deleteProduct(id);
+		
+		return "redirect:/";
+	}
+	
 	
 }

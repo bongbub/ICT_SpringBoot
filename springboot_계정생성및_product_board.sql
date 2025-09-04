@@ -47,6 +47,10 @@ COMMIT;
 CREATE SEQUENCE PRODUCT_ID_SEQ			-- 시퀀스 명은 ProductDTO @SequenceGenerat
 START WITH 1 NOCACHE ORDER;
 
+DROP SEQUENCE PRODUCT_ID_SEQ
+
+DELETE FROM mvc_product_tbl;
+
 
 -----------------------------------------------------------------
 -- [ 게시판 테이블 ]

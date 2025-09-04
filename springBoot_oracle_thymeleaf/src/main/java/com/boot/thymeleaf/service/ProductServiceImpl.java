@@ -27,17 +27,18 @@ public class ProductServiceImpl implements ProductService{
 		dao.save(dto);		// insert가 있으면 insert, insert가 없으면 update. --> 즉 업데이트에서도 이 문장 그대로 사용 가능.
 	}
 
+	// 1건 - select : 상세화면
 	@Override
 	public ProductDTO selectProduct(int id) {
 		System.out.println("서비스 - selectProduct()");
-		return null;
+		
+		return dao.findById(id).get();
 	}
 
-
-	@Override
-	public void deleteProduct(int id) {
+	@Override		
+	public void deleteProduct(int id) {		
 		System.out.println("서비스 - deleteProduct()");
-		
+		dao.deleteById(id);
 	}
 
 }

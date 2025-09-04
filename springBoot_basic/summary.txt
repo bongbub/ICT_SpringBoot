@@ -1,0 +1,78 @@
+-------------------------------------------------------------------------------------------------------------------------------------
+
+ORACLE + jsp + mybatis
+
+
+Dependency 추가
+1. Spring Boot DevTools
+2. Lombok
+3. Spring Data JPA
+4. MyBatis Framework
+5. Oracle Driver
+6. Spring Web
+
+
+[JSP 플러그인 설치, JSP 폴더 생성(src > main > webapp > WEB_INF > views )
+
+pom.xml 에 넣어줘야 하는 것
+<!-- JSP 사용시, 2가지 추가-->
+<!-- 1. Servlet -->
+<dependency>
+	<groupId>javax.servlet</groupId>
+	<artifactId>jstl</artifactId>
+	<version>1.2</version>
+</dependency>
+<!-- 2. tomcat - jasper : jasper는 tomcat의 JSP 엔진 -->
+<dependency>
+	<groupId>org.apache.tomcat.embed</groupId>
+	<artifactId>tomcat-embed-jasper</artifactId>
+</dependency>
+
+[롬복]
+<!-- lombok(롬복) 1) -->
+<dependency>
+	<groupId>org.projectlombok</groupId>
+	<artifactId>lombok</artifactId>
+	<optional>true</optional>
+</dependency>
+<!-- 롬복(2) version추가 -->
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.7.0</version>  <!-- 추가 -->
+            <configuration>
+               <source>1.8</source>  <!-- 추가 -->
+               <target>1.8</target>   <!-- 추가 -->
+               <annotationProcessorPaths>
+                  <path>
+                     <groupId>org.projectlombok</groupId>
+                     <artifactId>lombok</artifactId>
+                     <version>1.18.38</version> 	<!-- 변경 -->
+                  </path>
+               </annotationProcessorPaths>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+               <excludes>
+                  <exclude>
+                     <groupId>org.projectlombok</groupId>
+                     <artifactId>lombok</artifactId>
+                  </exclude>
+               </excludes>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+   
+   
+   ------------ 
+   만약 이거 해도 롬복이 안된다면 sts4 설치 폴더 내에 들어가서 (ex - DEV05 > install > 10.spring toll suite4 > sts-4.21.0.RELEASE > SpringToolSuite4.ini
+   SpringTollSuite4.ini 파일 맨 아래에 한 줄 추가해준다
+   -javaagent:D:\DEV05\install\10.spring toll suite4\sts-4.21.0.RELEASE\lombok.jar
+   
+   

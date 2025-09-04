@@ -2,6 +2,15 @@
 SpringBoot + Oracle + thymeleaf + JPA 방식
 # mybatis 대신 JPA
 
+Dependency 추가
+Spring Boot DevTools
+Lombok
+Spring Data JPA
+Oracle Driver
+Thymeleaf
+Spring Web
+
+
 
 DROP TABLE mvc_product_tbl CASCADE CONSTRAINTS;
 CREATE TABLE mvc_product_tbl(
@@ -40,3 +49,8 @@ DELETE FROM mvc_product_tbl;
 // 2. ProductDTO에 전략추가
 // 3. 기존 데이터 삭제 (pk가 겹치는 경우 UNIQUE 에러 방지) DELETE FROM mvc_product_tbl;
 // 4. 기존 데이터때문에 시퀀스 번호가 1번부터가 아닌 경우, 시퀀스를 드롭하고 (DROP SEQUENCE 시퀀스명) 다시 CREATE 한다.
+
+
+
+
+
