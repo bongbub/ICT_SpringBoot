@@ -23,7 +23,6 @@
     <fullyQualifiedTypeName name="com.boot.springBoot_basic.dto.BoardDTO"/>
     <fullyQualifiedTypeName name="com.boot.springBoot_basic.dto.BoardCommentDTO"/>
     <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
@@ -38,7 +37,6 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
-    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="com.boot.thymeleaf.dto.ProductDTO"/>
@@ -46,4 +44,10 @@
     <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="javax.persistence.SequenceGenerator"/>
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="com.boot.postgresql.dao.ProductRepository"/>
+    <fullyQualifiedTypeName name="com.boot.postgresql.service.ProductServiceImpl"/>
+    <fullyQualifiedTypeName name="com.boot.postgresql.dto.ProductDTO"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
 </qualifiedTypeNameHistroy>
