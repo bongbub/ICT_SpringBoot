@@ -1,0 +1,97 @@
+
+< BoardController >
+
+1)
+ResponseEntity  
+=>  Spring에서 @ResponseBody로 DTO를 반환하면 알아서 Json으로 변환해주기도 하고, 
+	상태코드(ex - 200, 201, 302... 등) 를 반환해준다. 
+	
+	HttpStatus.OK : 200
+	HttpStatus.CREATED : 201
+	
+
+
+2) 크로스 오리진
+@CrossOrigin
+public class ....(){}
+=> 컨트롤러에 @CrossOrigin 을 붙여주면 컨트롤러 진입 직전에 동작한다.
+	외부에서 자바 스크립트 요청이 오는 것을 허용한다. F5해서 콘솔을 다시 확인.
+	
+
+
+< BoardMapper >
+
+3)
+@Mapper
+@Repository
+public interface BoardMapper {... }
+=> @Mapper를 붙여주면, 구현을 위한 상속클래스가 필요없으며, @SqlSession의 기능까지 한 번에 지원한다.
+ 
+ 
+
+< BoardDTO >
+4)
+게시글 등록
+
+	4-1) mapper => max + 1
+
+	<!-- 게시글 작성 처리 -->
+	<insert id="insertBoard" parameterType="com.boot.react_board.dto.BoardDTO">
+		INSERT INTO mvc_board_tbl(b_num, B_TITLE, B_WRITER, B_CONTENT, B_PASSWORD)
+		values((SELECT nvl(MAX(b_num)+1,1) 
+		FROM mvc_board_tbl), #{b_title}, #{b_writer}, #{b_content}, #{b_password})
+	</insert>
+	
+	
+	----------------------------------------------------------------
+	4-2) JPA Repository 방식 
+		strategy :; SEQUENCE 방식으로 대체 (max+1과 같음)
+			-> 시퀀스 먼저 생성하고 와야함
+			(springBoot_oracle_thymeleaf 참조)
+	
+	public class BoardDTO {
+	@Data					// getter setter 생략 가능 (lombok)
+	@AllArgsConstructor		// 매개변수 생성자 대체
+	@NoArgsConstructor		// 디폴트 생성자 대신
+	@ToString				// ToString() 대신 사용
+	@Builder				// 매개변수 생성자에, 순서를 맞춰서 넣어주지 않아도 마지막에 build()를 작동. 즉 같은 타입의 다른 변수의 값을 서로 바꿔넣는 것을 방지한다.
+	@Entity					// ROM(table의 컬럼과 Object 의 멤버변수를 매핑)
+	@Table(name="mvc_product_tbl")
+	public class ProductDTO {
+	
+		// 시퀀스를 주엇다면 아래 두 줄의 시퀀스문을 추가해야함
+		@SequenceGenerator(schema="springboot_ict05", name="PRODUCT_ID_SEQ", sequenceName="PRODUCT_ID_SEQ", allocationSize=1)
+		@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCT_ID_SEQ")
+		@Id               // pk
+		private int id;
+		private String name;
+		private String brand;
+		private String madein;
+		....
+	}
+	
+
+
+	<!-- 게시글 수정 처리 -->
+	<update id="updateBoard" parameterType="com.boot.react_board.dto.BoardDTO">
+		UPDATE mvc_board_tbl 
+		 SET b_password = #{b_password} 
+		, b_title = #{b_title}
+		, b_content = #{b_content}
+		, b_writer = #{b_writer}
+		  WHERE b_num = #{b_num}
+	</update>
+	
+	writer까지 붙여줘야 작성자 수정도 가능함
+
+
+
+
+
+
+
+
+
+
+
+

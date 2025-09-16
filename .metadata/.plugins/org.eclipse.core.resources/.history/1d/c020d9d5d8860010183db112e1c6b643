@@ -1,5 +1,0 @@
-package com.boot.springBoot_basic.dto;
-
-public class ProductDTO {
-
-}

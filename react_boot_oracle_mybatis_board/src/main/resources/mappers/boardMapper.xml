@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	  
+<mapper namespace="com.boot.react_board.dao.BoardMapper">  <!-- namespace="패키지명.인터페이스" -->
+	
+
+   <!-- 게시글 목록 -->
+   <select id="boardList" parameterType="java.util.Map" resultType="com.boot.react_board.dto.BoardDTO">
+   
+	   	select *
+	   	FROM mvc_board_tbl
+	   	WHERE b_show = 'Y'
+	   	order by b_num desc
+
+   </select>
+   
+   
+   	<!-- 게시글 작성 처리 -->
+	<insert id="insertBoard" parameterType="com.boot.react_board.dto.BoardDTO">
+		INSERT INTO mvc_board_tbl(b_num, B_TITLE, B_WRITER, B_CONTENT, B_PASSWORD)
+				values((SELECT nvl(MAX(b_num)+1,1) 
+				FROM mvc_board_tbl), #{b_title}, #{b_writer}, #{b_content}, #{b_password})
+	</insert>
+   
+	<sql id="sort">
+  		<choose>
+   			<when test="sortType != null and sortType.equalsIgnoreCase('rn')">
+   				ORDER BY b_num DESC
+   			</when>
+   			<when test="sortType != null and sortType.equalsIgnoreCase('viewCnt')">
+   				ORDER BY b_readCnt DESC, b_num DESC
+   			</when>
+   			<when test="sortType != null and sortType.equalsIgnoreCase('commCnt')">
+   				ORDER BY b_comment_count DESC, b_num DESC
+   			</when>
+   			<otherwise>
+   				ORDER BY b_num DESC
+   			</otherwise>
+   		</choose>
+</sql>
+	
+ 
+	
+	<!-- 게시글 상세 처리 : 파라미터 일치 -->
+	<select id="findByNum" parameterType="int" resultType="com.boot.react_board.dto.BoardDTO">
+		SELECT * FROM mvc_board_tbl 
+						WHERE b_num = #{b_num}
+	</select>
+	
+	
+	<!-- 게시글 수정 처리 -->
+	<update id="updateBoard" parameterType="com.boot.react_board.dto.BoardDTO">
+		UPDATE mvc_board_tbl 
+		 SET b_password = #{b_password} 
+		, b_title = #{b_title}
+		, b_content = #{b_content}
+		, b_writer = #{b_writer}
+		  WHERE b_num = #{b_num}
+	</update>
+	
+	
+	<!-- 게시글 삭제 처리 -->
+	<update id="deleteBoard" parameterType="int">
+		update mvc_board_tbl
+		set b_show = 'N'
+		where b_num = #{b_num}
+	
+	</update>
+	
+
+	
+	
+ </mapper> 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><Context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+       
+   <!-- 커넥션풀(DBCP: DataBase Connection Pool 방식) => Servers > Tomcat > context.xml
+    => 톰캣 재설치시 추가해야 하며, 안하면 DB연결이 안된다.
+    => name이 식별자이므로 중복되면 안되고, lookup을 통해 검색을 한다.
+    Class.forName("oracle.jdbc.driver.OracleDriver");  // WEB-INF/lib 폴더에 jdbc6.jar 파일 추가하고 새로고침
+    String dbUrl = "jdbc:oracle:thin:@localhost:1521/xe";
+	String dbID = "scott_05";
+	String dbPassword="tiger";
+    -->
+    <Resource author="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxWait="1000" name="jdbc/jsp_pj_ict05" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521/xe" username="jsp_pj_ict05"/>
+    
+     <Resource author="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="7" maxWait="1000" name="jdbc/mybatis_ict05" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="mybatis_ict05"/> 
+	    
+	     <Resource author="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="7" maxWait="1000" name="jdbc/DC_shop" password="pet" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="DC_shop"/> 
+    
+</Context>

@@ -72,10 +72,10 @@ ALTER TABLE mvc_board_tbl
 
 
 SELECT * FROM mvc_board_tbl 
- ORDER BY b_num;
+WHERE b_num = 993;
 
 SELECT * FROM mvc_board_tbl 
- WHERE b_num = 990;
+ WHERE b_
 
 -- 게시글 입력(다건) => DECLARE~END;까지 블록잡아서 실행
 DECLARE   -- 선언문
