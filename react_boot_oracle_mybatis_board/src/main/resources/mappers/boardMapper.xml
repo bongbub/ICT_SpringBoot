@@ -31,7 +31,7 @@
    				ORDER BY b_num DESC
    			</when>
    			<when test="sortType != null and sortType.equalsIgnoreCase('viewCnt')">
-   				ORDER BY b_readCnt DESC, b_num DESC
+   				ORDER BY b_read_cnt DESC, b_num DESC
    			</when>
    			<when test="sortType != null and sortType.equalsIgnoreCase('commCnt')">
    				ORDER BY b_comment_count DESC, b_num DESC

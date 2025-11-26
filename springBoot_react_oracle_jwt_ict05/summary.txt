@@ -1,0 +1,250 @@
+================        JWT 학습 백엔드 프로젝트 생성(STS4)     ================
+
+name : springBoot_react_oracle_jwt_ict05
+java-17 maven-jar
+package : fullstack.jwt.back-end
+
+dependencies 설정  : 총 8가지
+(Security) - Spring Sequrity  
+(SQL) - JDBC API / Oracle Driver / Spring Data JPA / MyBatis Framework
+(Developer Tools) - Spring boot DevTools / Lombok
+(Web) - Spring Web
+
+
+
+------------------- [pom.xml 수정 ] -----------------------------
+
+1) 2.7.4버전으로 변경
+
+2) 아래 build에 추가 한 부분 추가해주기
+<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>  <!-- 추가 -->
+				<configuration>
+					<source>1.8</source>  <!-- 추가 -->
+                    <target>1.8</target>   <!-- 추가 -->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.36</version> <!--추가-->
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+
+----------- [실행해보기 (에러날예정) ] --------------------------------
+	
+	실행
+Run As > Spring Boot App 
+	
+	
+
+(!!!) pom.xml위의 링크란에 빨간줄 생길 시, https -> http로 교체
+
+(!!!)  java.lang.NoClassDefFoundError: org/springframework/aot/AotDetector
+	at org.mybatis.spring.mapper.ClassPathMapperScanner.<init>(ClassPathMapperScanner.java:95) ~[mybatis-spring-3.0.5.jar:3.0.5] 
+	위의 에러 발생시 
+	pom.xml mybatis 버전 3.0.5 --> 2.3.1로 변경
+
+(!!!) Description:
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+Reason: Failed to determine a suitable driver class
+   --> application.properties 파일을 설정해주지 않아서 생기는 오류!
+  
+기타 에러 발생시, 프로젝트 우클릭 > properties > java build path > 자바 버전 17인지 확인
+
+
+   
+--------------------[ application.properties 작성 ] ----------------------------------
+
+springBoot_basic  프로젝트의 application.properties 파일 복사해서, 필요한 부분만 남기고 제거하거나 수정
+
+>>>
+spring.application.name=springBoot_react_oracle_jwt_ict05
+
+
+# db connection(oracle) - spring(context.xml)
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=springboot_ict05
+spring.datasource.password=tiger
+
+# http port number(default 8080)
+server.port=8081
+
+# JPA SQL SHOW
+spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect
+spring.jpa.show-sql=true
+
+
+
+# custom error page
+server.error.whitelabel.enabled=false
+
+# MyBatis - spring(dataSource-config.xml)
+mybatis.mapper-locations=mappers/**/*.xml
+mybatis.type-aliases-package=fullstack.jwt.back_end.dao
+# 주의 : false를 주면 강제변환을 막는다. 강제변환 : bNum -> b_num,  b_num -> b_num, 예외) nim -> num 한단어인 경우는 true이어도 변환안함
+mybatis.configuration.map-underscore-to-camel-case=false
+logging.level.com.atoz_develop.mybatissample.repository=TRACE
+
+<<<<
+
+
+--------------------    !!!!! 중요 !!!!! -------------------------
+
+위의 작업들을 마치고, Run As Spring Boot App으로 실행시, 콘솔창에
+
+Using generated security password: 5a244996-f9c6-48f3-8d1e-680cc2c6aac7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+이런 문구가 뜨게 되는데 저 두 줄이 꼭 떠야하고,
+http://localhost:8081/login 에 접속해보면 로그인 화면이 떠야함!
+
+
+-======================================================
+
+controller 패키지 생성후 AuthController 만들기
+
+@RestController
+public class AuthController {
+	
+	// 로거 가져오기 (slf4j로 임포트 해야하는 것 주의)
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+	
+	
+	// http://localhost:8081    => user / 부트에서 생성한 비밀번호 붙여넣기
+	@GetMapping({"", "/"})			
+	public String index() {
+		
+		System.out.println("<<< index >>>");
+		
+		return "index";			// 실제 페이지가 아님 => @RestController로 인해, 주소 아닌 값을 브라우저에 출력하는 것임.
+	}
+}
+
+
+위에 준 패스워드를 해당 로그인창의 password 입력칸에 붙이고, 
+로그인 해보면 index 페이지가 나와야함
+
+
+
+=================== [ DB 생성 ] ======================
+
+
+
+-- SPRINGBOOT_ICT05 / tiger
+DROP TABLE react_login_tbl CASCADE CONSTRAINTS;
+CREATE TABLE react_login_tbl (
+   -- login     VARCHAR2(100)  PRIMARY KEY,
+    id          VARCHAR2(100)  PRIMARY KEY,
+    password    VARCHAR2(100) NOT NULL,
+    first_name  VARCHAR2(100) NOT NULL,
+    last_name   VARCHAR2(100) NOT NULL,
+    token       VARCHAR2(500)
+);
+
+SELECT * FROM react_login_tbl;
+
+
+===================== [ 리액트 플젝 생성 ] =======================
+
+
+vscode 열기 > open folder > springBoot_react_oracle_jwt_ict005 폴더 선택
+> Terminal > new Terminal > Command Prompt로 터미널 생성 > 
+
+프론트 플젝 생성 ->    D:\dev05\...\springBoot_react_oracle_jwt_ict05>npx create-react-app front-end
+생성한 프로젝트 이동 -> D:\dev05\...\springBoot_react_oracle_jwt_ict05>cd front-end
+실행 ->             D:\dev05\...\springBoot_react_oracle_jwt_ict05\front-end>npm start
+
+
+
+--------- [ front-end 파일 내 README.md 내에 추가 ] ----------------------
+* 주의 - front-end 파일 내의 터미널에서 작업중인지 확인! ----------
+ 
+1) classnames 추가
+	# npm i classnames --save      #  package.json에 "classnames": "^2.5.1", 추가
+
+2) bootstrap 추가
+	# npm install  bootstrap    # package.json에 최신버전의 "bootstrap": "^5.3.3", 추가됨
+	 => npm install -f bootstrap@^5.2.3			# 강제로 원하는 버전 설치
+
+
+3) package.json 파일 내에 dependecies에 추가된 것 확인할 수 있음. 
+ 
+ 
+ 
+4) public > favicon.ico, index.html 제외한 나머지 4개파일 삭제 
+
+5) src > App.css, App.js, index.js 제외한 나머지 5개파일 삭제 
+
+
+6) index.js bootstrap.min.css 추가 및 수정
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';  // 모든 플젝에 적용하므로 누락주의
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <App />  
+);
+
+
+7) App.js에서 지웠던 logo.svg 수정
+
+function App() {
+  return (
+    <div className="App">
+
+
+    </div>
+  );
+}
+
+export default App;
+
+
+8) npm start    
+
+
+------------[ Header.js 작성 ]---------------------------
+ src > components 폴더 생성 > Header.js 파일 생성
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+#spring.application.name=react_boot_oracle_jpa_board
+
+
+# .yml 파일은 계층구조! tap키가 굉장히 중요하다  --> . 을 :로 변경하고 한 탭 들여쓴다. (공통되는건 한번에)
+# 다음 라인은 한 탭씩 꼭 들어가야 한다.
+# key: [공백]value   --> 공백이 꼭 들어가야 key-value 쌍 형식
+
+# db connection(oracle) - spring(context.xml)
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: springboot_ict05
+    password: tiger
+
+
+# key: [공백]value   --> 공백이 꼭 들어가야 key-value 쌍 형식
+# http port number(default 8080)
+server.port: 8081
+
+
+# key: [공백]value   --> 공백이 꼭 들어가야 key-value 쌍 형식
+# custom error page
+server.error.whitelabel.enabled: false
+
+
+# key: [공백]value   --> 공백이 꼭 들어가야 key-value 쌍 형식
+# 주의 :false를 주면 강제 변환을 막는다. 강제 변환 : bNum -> b_num, b_num -> b_num
+mybatis.configuration.map-underscore-to-camel-case: false
+
+
+
+
+# ===================== application.properties   old버전
+# spring.application.name=react_boot_oracle_jpa_board
+
+# db connection(oracle) - spring(context.xml)
+#spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+#spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+#spring.datasource.username=springboot_ict05
+#spring.datasource.password=tiger
+
+# http port number(default 8080)
+#server.port=8081
+
+# JPA SQL SHOW
+#spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect
+#spring.jpa.show-sql=true
+
+# custom error page
+#server.error.whitelabel.enabled=false
+
+# 주의 :false를 주면 강제 변환을 막는다. 강제 변환 : bNum -> b_num, b_num -> b_num
+#mybatis.configuration.map-underscore-to-camel-case=false
+

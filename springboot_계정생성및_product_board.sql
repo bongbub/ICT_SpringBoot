@@ -53,7 +53,7 @@ DELETE FROM mvc_product_tbl;
 
 
 -----------------------------------------------------------------
--- [ 게시판 테이블 ]
+-- [ 게시판 테이블 ]		====> 컬렴명  소문자_소문자_.. 이렇게 주기! (대문자(카멜)로 주면 _로 스네이크로 바뀌거나.. 함 혼용해서 주지 않기 )
 DROP TABLE mvc_board_tbl CASCADE CONSTRAINTS;
 CREATE TABLE mvc_board_tbl(
    b_num      number(7) PRIMARY KEY,   -- 글번호
@@ -70,12 +70,22 @@ CREATE TABLE mvc_board_tbl(
 ALTER TABLE mvc_board_tbl
   ADD b_show VARCHAR2(1) DEFAULT 'Y';
 
+ALTER TABLE mvc_board_tbl
+ RENAME COLUMN b_regDate TO b_reg_date;
+ALTER TABLE mvc_board_tbl
+ RENAME COLUMN b_readCnt TO b_read_cnt;
 
-SELECT * FROM mvc_board_tbl 
-WHERE b_num = 993;
+DELETE FROM MVC_BOARD_TBL;
 
-SELECT * FROM mvc_board_tbl 
- WHERE b_
+SELECT * FROM MVC_BOARD_TBL;
+
+-- pk 자동 증가를 위해서 시퀀스 생성
+
+DROP SEQUENCE board_num_seq;
+CREATE SEQUENCE BOARD_NUM_SEQ
+START WITH 1 NOCACHE ORDER;
+
+INSERT SPRINGBOOT_ICT050MVC_BOARD_TBL  
 
 -- 게시글 입력(다건) => DECLARE~END;까지 블록잡아서 실행
 DECLARE   -- 선언문

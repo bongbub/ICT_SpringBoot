@@ -1,0 +1,136 @@
+================ [1.  설치]
+jpa
+web
+mybatis   추가 --> dto와 DB컬럼에 대해서 자동매핑시 에러 발생 가능성이 있기 때문에
+devtools
+oracle
+lombok
+
+
+<<<application.properties>>>
+
+# 주의 :false를 주면 강제 변환을 막는다. 강제 변환 : bNum -> b_num, b_num -> b_num
+mybatis.configuration.map-underscore-to-camel-case=false			
+==> TRUE를 주면 강제 변환을 시킨다. 잘 작동이 되지 않음 -> 위험
+
+컬럼명, DTO멤버변수 => 카멜표기법을 쓰면 강제 변환을 해버림, 애초에 스네이크법으로 생성  (bNum 비권장)
+
+
+================= [2. SQL 및 테이블 생성] 
+DB에서 생성
+
+-- [ 게시판 테이블 ]		====> 컬렴명  소문자_소문자_.. 이렇게 주기! (대문자(카멜)로 주면 _로 스네이크로 바뀌거나.. 함 혼용해서 주지 않기 )
+DROP TABLE mvc_board_tbl CASCADE CONSTRAINTS;
+CREATE TABLE mvc_board_tbl(
+   b_num      number(7) PRIMARY KEY,   -- 글번호
+   b_title      varchar2(50) NOT NULL,   -- 글제목
+   b_content    clob NOT NULL,         -- 글내용
+   b_writer      varchar2(30) NOT NULL,   -- 작성자
+   b_password  varchar2(30) NOT NULL,   -- 수정,삭제용 비밀번호
+   b_readCnt   number(6)   DEFAULT 0,   -- 조회수
+   b_regDate   DATE    DEFAULT sysdate, -- 작성일
+   b_comment_count   number(6) DEFAULT 0   -- 댓글갯수
+);
+
+-- 삭제시 b_show 컬럼을 'N'으로 수정, 리스트에서 b_show 컬럼이 'Y'인 것만 조회
+ALTER TABLE mvc_board_tbl
+  ADD b_show VARCHAR2(1) DEFAULT 'Y';
+
+
+-- pk 자동 증가를 위해서 시퀀스 생성
+CREATE SEQUENCE BOARD_NUM_SEQ
+START WITH 1 NOCACHE ORDER;
+
+DELETE FROM MVC_BOARD_TBL;			// 혹시나 데이터가 남아있었다면 delete하고 시작(시퀀스가 1부터 시작이므로 오류 방지를 위해)
+
+
+
+================= [3.  DTO 멤버변수 스네이크 방식으로 변경 b_regDate => b_reg_date ]	
+	@Id
+	@SequenceGenerator(schema="springboot_ict05", name="BOARD_NUM_SEQ", sequenceName="BOARD_NUM_SEQ", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BOARD_NUM_SEQ")   
+	private int b_num;				// 글번호
+	private String b_title;			// 글제목
+	private String b_content;		// 글내용
+	private String b_writer;		// 작성자
+	private String b_password;		// 수정, 삭제용 비밀번호
+	private int b_read_cnt;			// 조회수
+	private Date b_reg_date;			// 작성일		-- Date 는 sql걸로 import
+	private int b_comment_count;	// 댓글수
+
+}
+
+-----> DB에도 똑같이 변경해줘야함
+ALTER TABLE mvc_board_tbl
+ RENAME COLUMN b_regDate TO b_reg_date;
+ALTER TABLE mvc_board_tbl
+ RENAME COLUMN b_readCnt TO b_read_cnt;
+
+
+
+================= [4.  게시글 등록 insert]			==> 시퀀스가 1번부터 작동이 되므로, 직접 추가하지 않은 경우만... 걍 필요할때만 사용하고 앵간해선 사용 X!!!!!!!!!!!!!!!!!!!!!!!!!
+게시글 등록
+
+-- 게시글 입력(다건) => DECLARE~END;까지 블록잡아서 실행
+DECLARE   -- 선언문
+   i    NUMBER := 1;    -- 변수 i에 1을 대입
+BEGIN
+   WHILE i<=991 LOOP
+      INSERT INTO    mvc_board_tbl(b_num, b_title, b_content, b_writer, b_password, b_readCnt, b_regDate, b_comment_count)   
+      VALUES(i, '글제목'||i, '글내용'||i, '작성자'||i, 1234, 0, sysdate, 0);
+      i := i+1;
+   END LOOP;   
+END;   
+COMMIT;
+
+
+
+
+================= [5.  DTO 시퀀스 할당]
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+
+public class BoardDTO {
+	
+	@Id
+	@SequenceGenerator(schema="springboot_ict05", name="BOARD_NUM_SEQ", sequenceName="BOARD_NUM_SEQ", allocationSize=1)			// 시퀀스 명과 동일하게, db계정 이름 확인
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BOARD_NUM_SEQ")   	
+	private int b_num;				// 글번호
+	
+
+
+
+================= [6.  실행]
+
+RunAs > Spring Boot App
+http://localhost:8081/api/boardList
+
+
+목록이 잘 뿌려지면 성공
+
+================= [7.  실행]
+기존  react_boot_oracle_mybatis_board 에서 'front-react'파일 복사해서 붙여넣어줌
+
+
+================= [8.  실행]
+vscode > open folder > react_boot_oracle_jpa_board > front-react 선택해서 가져오기
+
+================= [9.  실행]
+cd로 해당 front-react로 이동후 npm start
+
+
+================= [10.  실행]
+깃허브 > ignore에 node module을 추가해서 깃허브에 올리지 않는다.
+	내려받은 후에 npm i를 실행하면 알아서 node_module이 생성된다.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

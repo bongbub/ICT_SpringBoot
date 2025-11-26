@@ -28,8 +28,8 @@ public class BoardDTO {
 	private String b_content;		// 글내용
 	private String b_writer;		// 작성자
 	private String b_password;		// 수정, 삭제용 비밀번호
-	private int b_readCnt;			// 조회수
-	private Date b_regDate;			// 작성일		-- Date 는 sql걸로 import
+	private int b_read_cnt;			// 조회수
+	private Date b_reg_date;			// 작성일		-- Date 는 sql걸로 import
 	private int b_comment_count;	// 댓글수
 	
 
